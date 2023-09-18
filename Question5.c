@@ -37,8 +37,6 @@ int main()
             {
                 putchar(ch);
             }
-            //printf("/n");
-            //exit(0);
             break;
 
         case '2':
@@ -77,3 +75,4 @@ int main()
 
     }
 }
+ Removing 2 lines from the file and added one new line....
