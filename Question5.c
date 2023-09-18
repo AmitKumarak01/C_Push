@@ -4,38 +4,76 @@
 
 int main()
 {
-    FILE *p = NULL;
-    char ch;
-    int linesCount = 0;
-    int WordCount =0;
+    FILE *p=NULL;
+    char filename[]="test.txt";
+    char option;
 
-    p = fopen("test.txt", "r");
+    p = fopen(filename,"r");
 
-    if(p == NULL)
+    if(p==NULL)
     {
-        printf("File does not open because it will not exist \n");
-        return -1;
+        printf("Error in opening the file i.e file does not exist");
+        return 0;
     }
 
-    while((ch=fgetc(p))!= EOF)
+    while(1)
     {
-        WordCount++;
-        if(ch=='\n')
+        printf("1. Display the file content:\n");
+        printf("2. Count the number of lines:\n");
+        printf("3. Count the number of characters:\n");
+        printf("4. Exit:\n");
+
+        printf("Enter the choice by the user : ");
+
+        scanf("%c",&option);
+
+        switch (option)
         {
-            linesCount++;
+        case '1':
+            printf("The content of the file is  %s : ",filename);
+            rewind(p);
+            int ch;
+            while((ch=fgetc(p))!=EOF)
+            {
+                putchar(ch);
+            }
+            //printf("/n");
+            //exit(0);
+            break;
+
+        case '2':
+            printf("Number of lines in that file is : ");
+            rewind(p);
+            int line_count=0;
+            while((ch=fgetc(p))!= EOF)
+            {
+            if(ch=='\n')
+                {
+                    line_count++;
+                }
+            }
+            printf("%d\n",line_count+1);
+            break;
+
+        case '3':
+            printf("Count the number of characters :");
+            rewind(p);
+            int character_count=0;
+            while((ch=fgetc(p))!= EOF)
+            {
+                character_count++;
+            }
+            printf("%d\n",character_count);
+            break;
+
+        case '4':
+            printf("Exit the program :");
+            fclose(p);
+            exit(0);
+        
+        default:
+            break;
         }
+
     }
-
-    fclose(p);
-    p = NULL;
-
-    printf("Total number of lines in that file is : %d\n", linesCount+1);
-    printf("Total number of words is : %d",WordCount );
-
-    
-
-
-
-    return 0;
 }
-
